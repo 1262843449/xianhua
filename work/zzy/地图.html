@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    <title>位置经纬度 + 驾车规划路线</title>
+    <style type="text/css">
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <style type="text/css">
+        #panel {
+            position: fixed;
+            background-color: white;
+            max-height: 90%;
+            overflow-y: auto;
+            top: 10px;
+            right: 10px;
+            width: 280px;
+        }
+
+        #panel .amap-call {
+            background-color: #009cf9;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        #panel .amap-lib-driving {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            overflow: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: "59dd6fc5fa32a45b184327433b93b253",
+        };
+    </script>
+    <script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=8b5d017016f0f9543c3e927259428ba1&plugin=AMap.Driving,AMap.Scale"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+<style>
+    #btn {
+        width: 100px;
+        height: 40px;
+        background-color: red;
+        color: white;
+        position: absolute;
+        bottom: 100px;
+        left: 47%;
+    }
+
+
+
+    a {
+        color: black;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <div id="container"></div>
+    <div id="panel"></div>
+    <button id="btn" onclick="fun()">开始绘制路线</button>
+
+    <script type="text/javascript">
+        //基本地图加载
+        var map = new AMap.Map("container", {
+            resizeEnable: true,
+            center: [113.428155, 34.774258], //地图中心点
+            zoom: 10, //地图显示的缩放级别
+        });
+
+        //给按钮设置绑定事件
+        function fun() {
+            var scale = new AMap.Scale({
+                visible: false,
+            });
+            map.addControl(scale);
+            scale.show();
+            //构造路线导航类
+            var driving = new AMap.Driving({
+                map: map,
+                panel: "panel",
+            });
+            // 根据起终点经纬度规划驾车导航路线
+            driving.search(
+                new AMap.LngLat(113.427781, 34.765599),
+                new AMap.LngLat(112.41, 35.00),
+                function (status, result) {
+                    // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                    if (status === "complete") {
+                        log.success("绘制驾车路线完成");
+                    } else {
+                        log.error("获取驾车数据失败：" + result);
+                    }
+                }
+            );
+            marker = new AMap.Marker({
+                icon: "./icon/标记.png",
+                position: [113.428155, 34.774258],
+                offset: new AMap.Pixel(-13, -30),
+            });
+            marker.setMap(map);
+            var lineArr = [
+                [113.427781, 34.765599],
+                [112.41, 35.00],
+            ];
+            var circle = new AMap.Circle({
+                map: map,
+                center: lineArr[0], //设置线覆盖物路径
+                fillColor: "red", //填充色
+                fillOpacity: 0.3, //填充透明度
+                storkeWeight: 0,
+            });
+            var circle1 = new AMap.Circle({
+                map: map,
+                center: lineArr[1], //设置线覆盖物路径
+                fillColor: "purple", //填充色
+                fillOpacity: 0.3, //填充透明度
+            });
+            map.setFitView();
+        }
+    </script>
+</body>
+
+</html>

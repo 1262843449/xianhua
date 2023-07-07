@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <style>
+        .swiper {
+            width: 80%;
+            height: 90%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img
+                    src="https://ts2.cn.mm.bing.net/th?id=ORMS.1965b6914fb256cd1081899c213ecd99&pid=Wdp&w=300&h=156&qlt=90&c=1&rs=1&dpr=1.5&p=0">
+            </div>
+            <div class="swiper-slide"><img
+                    src="https://ts2.cn.mm.bing.net/th?id=ORMS.45acd474d527905bf24c7620915f0dee&pid=Wdp&w=300&h=156&qlt=90&c=1&rs=1&dpr=1.5&p=0">
+            </div>
+            <div class="swiper-slide"><img
+                    src="https://ts2.cn.mm.bing.net/th?id=ORMS.3002a85eba4c3d80a830e8f07023d1e7&pid=Wdp&w=300&h=156&qlt=90&c=1&rs=1&dpr=1.5&p=0">
+            </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <script>
+        var mySwiper = new Swiper(".swiper", {
+            direction: "horizontal", // 水平切换选项 垂直:vertical
+            // loop: true, // 循环模式选项
+
+            // 如果需要分页器
+            pagination: {
+                el: ".swiper-pagination",
+                //type:
+                type: "custom",
+                renderCustom: function (swiper, current, total) {
+                    return current + " of " + total;
+                },
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+
+            // 如果需要滚动条
+            scrollbar: {
+                el: ".swiper-scrollbar",
+            },
+        });
+      /* function fun(dom, options) {
+                                  let mySwiper = {};
+                                  object.assign(window, { options });
+                                }
+                                new fun("#box", {
+                                  name: 123,
+                                }); */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+  //sass定义变量
+  $primary-color: rgba(0, 0, 0, .05);
+  $primary-color2: #f0f2f5;
+  $box-shadow: 4px 4px 40px;
+
+  #a a {
+      position: relative;
+      left: 1400px;
+  }
+
+
+  .a {
+      color: #666;
+      background: $primary-color2;
+      -webkit-box-shadow: $box-shadow $primary-color;
+      box-shadow: $box-shadow $primary-color;
+      border-color: $primary-color;
+      cursor: pointer;
+      width: 425px;
+      height: 108px;
+
+
+      margin-top: 55px;
+  }
+
+  .a:first-child {
+      margin-left: 260px;
+  }
+
+  #tu {
+      width: 500px;
+      height: 150px;
+      all: initial;
+      margin-left: 250px;
+      margin-top: 50px;
+  }
+
+  .box {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 50px;
+  }
+
+  .user {
+      margin-top: 25px;
+      margin-left: 20px;
+  }
+
+  /*  p {
+
+      font-size: 17px;
+      margin-top: -35px;
+      margin-left: 331px;
+    } */
+
+  .zi {
+      margin-top: 35px;
+      float: right;
+      width: 100px;
+      height: 80px;
+      font-size: 17px;
+      margin-right: 15px;
+  }
+
+  //sass嵌套
+  body {
+      background-color: $primary-color2;
+      position: relative;
+
+      #main {
+          position: absolute;
+          top: 255px;
+          left: 255px;
+      }
+
+      .jia {
+          border: RGB(220, 220, 220) 1px solid;
+          position: absolute;
+          left: 254px;
+          top: 860px;
+          width: 1386px;
+          height: 550px;
+          background-color: #FFFFFF;
+      }
+  }
+
+  //media
+  @media screen and (max-width: 700px) {
+      .box {
+          flex-wrap: wrap;
+
+          .a:first-child {
+              margin-left: 0px;
+          }
+      }
+
+      #main {
+          margin-top: 500px;
+      }
+
+      /* 小于700px的屏幕 */
+      body {
+          background-color: lightblue;
+      }
+  }
+
+  @media screen and (min-width: 700px) {
+
+
+      /* 大于或等于700px的屏幕 */
+      body {
+          background-color: none;
+      }
+  }
